@@ -1,0 +1,9 @@
+# Local configuration parameters.
+# - Configuration parameters and their defaults are defined in `mesmo/config_default.yml`
+# - Copy from `mesmo/config_default.yml` and modify parameters here to set the local configuration.
+paths:
+  additional_data: []
+
+optimization:
+  solver_name: gurobi # highs # gurobi
+  # solver_interface: cvxpy

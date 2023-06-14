@@ -1,0 +1,40 @@
+name: Python tests
+on: [push]
+
+jobs:
+  run-tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [
+          windows-latest,
+          macos-latest,
+          ubuntu-latest
+        ]
+        python-version: [3.7, 3.8, 3.9]
+    defaults:
+      run:
+        shell: bash -l {0}  # Required for conda commands.
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Set up Python
+      uses: conda-incubator/setup-miniconda@v2
+    - name: Install dependencies
+      run: |
+        conda create -n cobmo -c conda-forge python=${{ matrix.python-version }} cvxpy numpy pandas scipy
+        conda activate cobmo
+        pip install -e .[tests]
+    - name: Lint with flake8
+      run: |
+        conda activate cobmo
+        # Stop the build if there are Python syntax errors or undefined names.
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+    - name: Run tests
+      run: |
+        conda activate cobmo
+        pytest tests --cov=./ --cov-report=xml

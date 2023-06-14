@@ -1,0 +1,8 @@
+parameter_set,parameter_name,parameter_value,parameter_unit,parameter_comment
+constants,density_air,1.225,kg/m3,
+constants,heat_capacity_air,1211.025,J/(m3*K),
+constants,stefan_boltzmann_constant,5.67E-08,W/(m2*K4),
+constants,heat_transfer_coefficient_exterior_convection,12.0,W/(m2*K),ISO 6946
+constants,heat_transfer_coefficient_interior_convection,4.0,W/(m2*K),ISO 6946 - TODO: Differentiate between vertical/horizontal.
+constants,water_specific_heat,4186.0,J/(kg*K),
+constants,water_density,1000.0,kg/m3,
